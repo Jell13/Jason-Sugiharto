@@ -13,28 +13,56 @@ const About = () => {
 
 
     useGSAP(() => {
-        gsap.set(workContainerRef.current, { 
+        const container = workContainerRef.current;
+        const section = workRef.current;
+
+        // Set initial state
+        gsap.set(container, {
             scaleX: 1,
-            transformOrigin: "center top" 
+            transformOrigin: "center top"
         });
 
-        // Create animation
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: workRef.current,
-                start: "bottom 80%",
-                end: "bottom top",
-                scrub: true,
-                markers: false,
-                invalidateOnRefresh: true
+        const handleScroll = () => {
+            const scrollY = window.scrollY;
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const windowHeight = window.innerHeight;
+
+            // Calculate when to start (near bottom - adjust 0.85 to change start point)
+            const startPos = sectionTop + (sectionHeight * 0.85);
+            
+            // Calculate when to finish (at very bottom)
+            const endPos = sectionTop + sectionHeight;
+            
+            // Calculate progress (0 to 1)
+            const progress = Math.min(1,
+                Math.max(0, (scrollY - startPos) / (endPos - startPos)
+            ));
+
+            // Only apply if we're in the trigger zone
+            if (scrollY >= startPos) {
+                gsap.to(container, {
+                    scaleX: 1 - (0.04 * progress),
+                    overwrite: "auto",
+                    duration: 0.1
+                });
+            } else {
+                // Reset if above trigger zone
+                gsap.set(container, { scaleX: 1 });
             }
-        });
+        };
 
-        // Add scale animation to timeline
-        tl.to(workContainerRef.current, {
-            scaleX: 0.96,
-            ease: "power1.out"
-        });
+        // Add scroll listener
+        window.addEventListener('scroll', handleScroll);
+
+        // Initial calculation
+        handleScroll();
+
+        // Cleanup
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            gsap.set(container, { scaleX: 1 }); // Reset on unmount
+        };
     }, {scope: workRef.current})
 
   return (
