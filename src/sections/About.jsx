@@ -49,7 +49,7 @@ const About = () => {
                 start: 'bottom 80%',
                 end: 'bottom top',
                 scrub: true,
-                markers: false,
+                markers: true,
                 id: 'about-trigger',
                 invalidateOnRefresh: true,
             },
