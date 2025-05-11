@@ -13,27 +13,28 @@ const About = () => {
 
 
     useGSAP(() => {
-        gsap.fromTo( workContainerRef.current,
-            { scaleX: 1 },
-            {   
-                scaleX: 0.96,
-                scrollTrigger: {
-                    trigger: workRef.current,
-                    start: 'center center',
-                    end: 'bottom top',
-                    scrub: true,
-                    markers: false, // Disable in production
-                    id: 'about-trigger',
-                    invalidateOnRefresh: true,
-                    onRefresh: () => gsap.set(workContainerRef.current, { scaleX: 1 })
-                }
+        gsap.set(workContainerRef.current, { 
+            scaleX: 1,
+            transformOrigin: "center top" 
+        });
+
+        // Create animation
+        gsap.to(workContainerRef.current, {
+            scaleX: 0.96,
+            scrollTrigger: {
+                trigger: workRef.current,
+                start: "bottom 80%",
+                end: "bottom top",
+                scrub: true,
+                markers: false,
+                invalidateOnRefresh: true
             }
-        )
-    }, {scope: workRef})
+        });
+    }, {scope: workRef.current})
 
   return (
     <section ref={workRef} id='about' className='relative'>
-        <div ref={workContainerRef} className='bg-secondary text-primary border-none rounded-b-3xl font-libre'>
+        <div id='container' ref={workContainerRef} className='bg-secondary text-primary border-none rounded-b-3xl font-libre'>
             <div className='border-t border-t-[#3f3f38] flex flex-col gap-y-16 md:px-10 px-6'>
                 <div className='grid grid-cols-12 gap-2 mt-20'>
                     <LuArrowDownRight size={100} className='text-primary col-span-1 font-thin col-start-2 hidden md:block'/>
