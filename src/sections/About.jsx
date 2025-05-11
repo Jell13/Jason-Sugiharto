@@ -10,6 +10,7 @@ const About = () => {
 
     const workRef = useRef();
 
+
     useGSAP(() => {
         gsap.fromTo( workRef.current,
             { scaleX: 1 },
@@ -17,7 +18,7 @@ const About = () => {
                 scaleX: 0.96,
                 scrollTrigger: {
                     trigger: workRef.current,
-                    start: 'bottom 80%',
+                    start: 'center center',
                     end: 'bottom top',
                     scrub: true,
                     markers: false, // Disable in production
