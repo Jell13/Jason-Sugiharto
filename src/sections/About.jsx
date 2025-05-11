@@ -36,34 +36,41 @@ const About = () => {
     // }, [])
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            // Wait for EVERYTHING (images, fonts, etc.)
-            window.addEventListener('load', () => {
-            gsap.fromTo(workRef.current, 
-                { scaleX: 1 },
-                {
+        let ctx = gsap.context(() => {
+            // Initialize animation
+            const animation = gsap.fromTo(workRef.current, 
+            { scaleX: 1 },
+            {
                 scaleX: 0.96,
                 scrollTrigger: {
-                    trigger: workRef.current,
-                    start: "bottom 80%",
-                    end: "bottom top",
-                    scrub: true,
-                    // markers: true, // Keep enabled temporarily
-                    invalidateOnRefresh: true,
-                    anticipatePin: 1 // Prevents jumps during scroll
+                trigger: workRef.current,
+                start: "bottom 80%",
+                end: "bottom top",
+                scrub: true,
+                markers: false,
+                // Critical for refresh:
+                id: "about-section", // Unique ID
+                invalidateOnRefresh: true
                 }
-                }
-            );
-            ScrollTrigger.refresh(); // Final position update
-            });
-
-            // Fallback if load event already fired
-            if (document.readyState === 'complete') {
-            ScrollTrigger.refresh();
             }
+            );
+
+            // Vercel-specific fix
+            const handleRefresh = () => ScrollTrigger.refresh();
+            window.addEventListener('resize', handleRefresh);
+            
+            return () => {
+            // Proper cleanup
+            animation.scrollTrigger?.kill();
+            window.removeEventListener('resize', handleRefresh);
+            };
         });
 
-        return () => ctx.revert();
+        return () => {
+            // Nuclear option - kills ALL ScrollTriggers
+            ScrollTrigger.getAll().forEach(t => t.kill());
+            ctx.revert();
+        };
     }, [])
   return (
     <section ref={workRef} style={{scaleX: 1}} id='about' className='bg-secondary text-primary border-none rounded-b-3xl font-libre'>
