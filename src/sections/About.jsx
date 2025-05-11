@@ -10,31 +10,63 @@ const About = () => {
     const workRef = useRef();
     const workContentRef = useRef();
 
+    // useEffect(() => {
+
+    //     const workSection = workRef.current;
+
+    //     gsap.fromTo(workSection,
+    //         {
+    //             scaleX: 1
+    //         },
+    //         {
+    //             scaleX: 0.96,
+    //             scrollTrigger:{
+    //                 trigger: workSection,
+    //                 start: "top 80%",    // When top of element is 80% down viewport
+    //                 end: "bottom 20%",
+    //                 scrub: true,
+    //                 markers: true,
+    //                 invalidateOnRefresh: true
+    //             }
+    //         }
+    //     )
+    //     return () => {
+    //         ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    //     };
+    // }, [])
+
     useEffect(() => {
-
-        const workSection = workRef.current;
-
-        gsap.fromTo(workSection,
-            {
-                scaleX: 1
-            },
-            {
+        const ctx = gsap.context(() => {
+            // Wait for EVERYTHING (images, fonts, etc.)
+            window.addEventListener('load', () => {
+            gsap.fromTo(workRef.current, 
+                { scaleX: 1 },
+                {
                 scaleX: 0.96,
-                scrollTrigger:{
-                    trigger: workSection,
+                scrollTrigger: {
+                    trigger: workRef.current,
                     start: "bottom 80%",
                     end: "bottom top",
                     scrub: true,
-                    markers: false
+                    // markers: true, // Keep enabled temporarily
+                    invalidateOnRefresh: true,
+                    anticipatePin: 1 // Prevents jumps during scroll
                 }
+                }
+            );
+            ScrollTrigger.refresh(); // Final position update
+            });
+
+            // Fallback if load event already fired
+            if (document.readyState === 'complete') {
+            ScrollTrigger.refresh();
             }
-        )
-        return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        };
+        });
+
+        return () => ctx.revert();
     }, [])
   return (
-    <section ref={workRef} id='about' className='bg-secondary text-primary border-none rounded-b-3xl font-libre'>
+    <section ref={workRef} style={{scaleX: 1}} id='about' className='bg-secondary text-primary border-none rounded-b-3xl font-libre'>
         <div ref={workContentRef} className='border-t border-t-[#3f3f38] flex flex-col gap-y-16 md:px-10 px-6'>
             <div className='grid grid-cols-12 gap-2 mt-20'>
                 <LuArrowDownRight size={100} className='text-primary col-span-1 font-thin col-start-2 hidden md:block'/>

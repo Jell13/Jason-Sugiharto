@@ -25,7 +25,7 @@ const Works = () => {
                 <div className='lg:col-span-7 col-span-12 mb-20'>
                     <a href="">
                         <div className='flex justify-center items-center'>
-                        <img src="https://www.lifewire.com/thmb/Uqi3NYSBuoCojLl65_it-e5NmVg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/keyboard-light-up-razer-gaming-2b6aa4b392184326925211f0cae4d6b9.jpg" alt="" loading='lazy'/>
+                        <img src="https://www.lifewire.com/thmb/Uqi3NYSBuoCojLl65_it-e5NmVg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/keyboard-light-up-razer-gaming-2b6aa4b392184326925211f0cae4d6b9.jpg" alt=""/>
                         <div className='absolute z-10 text-white text-2xl'>
                             Vid of project here
                         </div>
@@ -47,7 +47,7 @@ const Works = () => {
                 <div className='lg:col-span-7 col-span-12 flex flex-col gap-8 mb-20'>
                     <a href="">
                         <div className='relative flex justify-center items-center'>
-                            <img src="https://preview.redd.it/pkvfv2b209i61.jpg?width=4032&format=pjpg&auto=webp&s=f8a961144201dff925b7ec7ec3d3d4d09d10a338" alt="" loading='lazy'/>
+                            <img src="https://preview.redd.it/pkvfv2b209i61.jpg?width=4032&format=pjpg&auto=webp&s=f8a961144201dff925b7ec7ec3d3d4d09d10a338" alt=""/>
                             <div className='absolute z-10 text-white text-2xl'>
                                 Vid of project here
                             </div>
@@ -78,7 +78,7 @@ const Works = () => {
                 <div className='lg:col-span-7 col-span-12 mb-20'>
                     <a href="">
                         <div className='relative flex justify-center items-center'>
-                            <img src="https://i.redd.it/xlwemhje70i81.jpg" alt="" loading='lazy'/>
+                            <img src="https://i.redd.it/xlwemhje70i81.jpg" alt=""/>
                             <div className='absolute z-10 text-white text-2xl'>
                                 Vid of project here
                             </div>
