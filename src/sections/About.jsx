@@ -19,8 +19,7 @@ const About = () => {
         });
 
         // Create animation
-        gsap.to(workContainerRef.current, {
-            scaleX: 0.96,
+        const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: workRef.current,
                 start: "bottom 80%",
@@ -29,6 +28,12 @@ const About = () => {
                 markers: false,
                 invalidateOnRefresh: true
             }
+        });
+
+        // Add scale animation to timeline
+        tl.to(workContainerRef.current, {
+            scaleX: 0.96,
+            ease: "power1.out"
         });
     }, {scope: workRef.current})
 
