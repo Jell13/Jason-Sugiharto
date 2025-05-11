@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -9,30 +10,49 @@ const Hero = () => {
     const heroRef = useRef();
     const heroContainerRef = useRef();
 
-    useEffect(() => {
-        let ctx = gsap.context(() => {
-        const heroSection = heroRef.current;
-        const heroContent = heroContainerRef.current;
+    useGSAP(() => {
+        const tl = gsap.timeline({
+            scrollTrigger:{
+                trigger: heroRef.current,
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+                markers: false,
+                id: "hero-trigger"
+            }
+        })
 
-        gsap.to(heroContent, {
-            scrollTrigger: {
-            trigger: heroSection,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-            markers: false,
-            id: "hero-trigger",
-            },
+        tl.to(heroContainerRef.current, {
             opacity: 0,
             y: -100,
-            ease: "power2.inOut",
-        });
-        }, heroRef);
+            ease: "power2.inOut"
+        })
+    }, { scope: heroRef })
 
-        return () => {
-        ctx.revert(); // This reverts only what's created in this component
-        };
-    }, [])
+    // useEffect(() => {
+    //     let ctx = gsap.context(() => {
+    //     const heroSection = heroRef.current;
+    //     const heroContent = heroContainerRef.current;
+
+    //     gsap.to(heroContent, {
+    //         scrollTrigger: {
+    //         trigger: heroSection,
+    //         start: "top top",
+    //         end: "bottom top",
+    //         scrub: true,
+    //         markers: false,
+    //         id: "hero-trigger",
+    //         },
+    //         opacity: 0,
+    //         y: -100,
+    //         ease: "power2.inOut",
+    //     });
+    //     }, heroRef);
+
+    //     return () => {
+    //     ctx.revert(); // This reverts only what's created in this component
+    //     };
+    // }, [])
 
   return (
     <>

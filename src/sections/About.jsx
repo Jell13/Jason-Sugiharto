@@ -2,69 +2,34 @@ import React, { useEffect, useRef } from 'react'
 import { LuArrowDownRight } from "react-icons/lu"
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
 
     const workRef = useRef();
-    const workContentRef = useRef();
 
-    // useEffect(() => {
-
-    //     const workSection = workRef.current;
-
-    //     gsap.fromTo(workSection,
-    //         {
-    //             scaleX: 1
-    //         },
-    //         {
-    //             scaleX: 0.96,
-    //             scrollTrigger:{
-    //                 trigger: workSection,
-    //                 start: "top 80%",    // When top of element is 80% down viewport
-    //                 end: "bottom 20%",
-    //                 scrub: true,
-    //                 markers: true,
-    //                 invalidateOnRefresh: true
-    //             }
-    //         }
-    //     )
-    //     return () => {
-    //         ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    //     };
-    // }, [])
-
-    useEffect(() => {
-        let ctx = gsap.context(() => {
-        gsap.set(workRef.current, { scaleX: 1 });
-
-        gsap.fromTo(
-            workRef.current,
+    useGSAP(() => {
+        gsap.fromTo( workRef.current,
             { scaleX: 1 },
-            {
-            scaleX: 0.96,
-            scrollTrigger: {
-                trigger: workRef.current,
-                start: 'bottom 80%',
-                end: 'bottom top',
-                scrub: true,
-                markers: true,
-                id: 'about-trigger',
-                invalidateOnRefresh: true,
-            },
+            {   
+                scaleX: 0.96,
+                scrollTrigger: {
+                    trigger: workRef.current,
+                    start: 'bottom 80%',
+                    end: 'bottom top',
+                    scrub: true,
+                    markers: false, // Disable in production
+                    id: 'about-trigger'
+                }
             }
-        );
-        }, workRef);
-
-        return () => {
-        ctx.revert(); // Cleanly kill only the triggers from this component
-        };
-    }, []);
+        )
+    }, {scope: workRef})
 
   return (
     <section ref={workRef} style={{transform: 'scaleX(1)', transformOrigin: 'center'}} id='about' className='bg-secondary text-primary border-none rounded-b-3xl font-libre'>
-        <div ref={workContentRef} className='border-t border-t-[#3f3f38] flex flex-col gap-y-16 md:px-10 px-6'>
+        <div className='border-t border-t-[#3f3f38] flex flex-col gap-y-16 md:px-10 px-6'>
             <div className='grid grid-cols-12 gap-2 mt-20'>
                 <LuArrowDownRight size={100} className='text-primary col-span-1 font-thin col-start-2 hidden md:block'/>
                 <h2 className='lg:col-span-7 font-prompt lg:col-start-6 col-span-12 flex flex-col xl:text-[6rem] lg:text-[5rem] md:text-[4rem] text-[3rem] space-y-0 gap-0 font-medium leading-none'>
