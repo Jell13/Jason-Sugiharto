@@ -46,7 +46,7 @@ const About = () => {
                 scaleX: 0.96,
                 scrollTrigger: {
                 trigger: workRef.current,
-                start: "bottom 80%",
+                start: "top 95%",
                 end: "bottom top",
                 scrub: true,
                 markers: false,
