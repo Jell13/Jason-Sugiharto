@@ -10,25 +10,27 @@ const Hero = () => {
     const heroContainerRef = useRef();
 
     useEffect(() => {
+        let ctx = gsap.context(() => {
         const heroSection = heroRef.current;
         const heroContent = heroContainerRef.current;
 
-        gsap.to(heroContent, 
-            {
-                scrollTrigger:{
-                    trigger: heroSection,
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true,
-                    markers: false
-                },
-                opacity: 0,
-                y: -100,
-                ease: "power2.inOut"
-            }
-        )
+        gsap.to(heroContent, {
+            scrollTrigger: {
+            trigger: heroSection,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+            markers: false,
+            id: "hero-trigger",
+            },
+            opacity: 0,
+            y: -100,
+            ease: "power2.inOut",
+        });
+        }, heroRef);
+
         return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        ctx.revert(); // This reverts only what's created in this component
         };
     }, [])
 

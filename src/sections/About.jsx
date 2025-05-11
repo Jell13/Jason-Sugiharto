@@ -37,39 +37,28 @@ const About = () => {
 
     useEffect(() => {
         let ctx = gsap.context(() => {
+        gsap.set(workRef.current, { scaleX: 1 });
 
-            gsap.set(workRef.current, { scaleX: 1 });
-
-            const animation = gsap.fromTo(workRef.current,
+        gsap.fromTo(
+            workRef.current,
             { scaleX: 1 },
             {
-                scaleX: 0.96,
-                scrollTrigger: {
+            scaleX: 0.96,
+            scrollTrigger: {
                 trigger: workRef.current,
-                start: "top 95%",
-                end: "bottom top",
+                start: 'bottom 80%',
+                end: 'bottom top',
                 scrub: true,
                 markers: false,
-                id: "about-section",
+                id: 'about-trigger',
                 invalidateOnRefresh: true,
-                }
+            },
             }
-            );
-
-            const handleRefresh = () => ScrollTrigger.refresh();
-            window.addEventListener('resize', handleRefresh);
-            window.addEventListener('load', handleRefresh); // ✅ add this
-
-            return () => {
-            animation.scrollTrigger?.kill();
-            window.removeEventListener('resize', handleRefresh);
-            window.removeEventListener('load', handleRefresh); // ✅ clean up
-            };
-        });
+        );
+        }, workRef);
 
         return () => {
-            ScrollTrigger.getAll().forEach(t => t.kill());
-            ctx.revert();
+        ctx.revert(); // Cleanly kill only the triggers from this component
         };
     }, []);
 
