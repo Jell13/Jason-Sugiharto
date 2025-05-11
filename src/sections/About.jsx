@@ -37,8 +37,7 @@ const About = () => {
 
     useEffect(() => {
         let ctx = gsap.context(() => {
-            // Initialize animation
-            const animation = gsap.fromTo(workRef.current, 
+            const animation = gsap.fromTo(workRef.current,
             { scaleX: 1 },
             {
                 scaleX: 0.96,
@@ -48,32 +47,31 @@ const About = () => {
                 end: "bottom top",
                 scrub: true,
                 markers: false,
-                // Critical for refresh:
-                id: "about-section", // Unique ID
-                invalidateOnRefresh: true
+                id: "about-section",
+                invalidateOnRefresh: true,
                 }
             }
             );
 
-            // Vercel-specific fix
             const handleRefresh = () => ScrollTrigger.refresh();
             window.addEventListener('resize', handleRefresh);
-            
+            window.addEventListener('load', handleRefresh); // ✅ add this
+
             return () => {
-            // Proper cleanup
             animation.scrollTrigger?.kill();
             window.removeEventListener('resize', handleRefresh);
+            window.removeEventListener('load', handleRefresh); // ✅ clean up
             };
         });
 
         return () => {
-            // Nuclear option - kills ALL ScrollTriggers
             ScrollTrigger.getAll().forEach(t => t.kill());
             ctx.revert();
         };
-    }, [])
+    }, []);
+
   return (
-    <section ref={workRef} style={{scaleX: 1}} id='about' className='bg-secondary text-primary border-none rounded-b-3xl font-libre'>
+    <section ref={workRef} style={{transform: 'scaleX(1)'}} id='about' className='bg-secondary text-primary border-none rounded-b-3xl font-libre'>
         <div ref={workContentRef} className='border-t border-t-[#3f3f38] flex flex-col gap-y-16 md:px-10 px-6'>
             <div className='grid grid-cols-12 gap-2 mt-20'>
                 <LuArrowDownRight size={100} className='text-primary col-span-1 font-thin col-start-2 hidden md:block'/>
