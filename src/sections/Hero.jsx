@@ -13,7 +13,7 @@ const Hero = () => {
     useGSAP(() => {
         const tl = gsap.timeline({
             scrollTrigger:{
-                trigger: heroRef.current,
+                trigger: "#home",
                 start: "top top",
                 end: "bottom top",
                 scrub: true,
@@ -22,42 +22,17 @@ const Hero = () => {
             }
         })
 
-        tl.to(heroContainerRef.current, {
+        tl.to("#container-hero", {
             opacity: 0,
             y: -100,
             ease: "power2.inOut"
         })
-    }, { scope: heroRef })
-
-    // useEffect(() => {
-    //     let ctx = gsap.context(() => {
-    //     const heroSection = heroRef.current;
-    //     const heroContent = heroContainerRef.current;
-
-    //     gsap.to(heroContent, {
-    //         scrollTrigger: {
-    //         trigger: heroSection,
-    //         start: "top top",
-    //         end: "bottom top",
-    //         scrub: true,
-    //         markers: false,
-    //         id: "hero-trigger",
-    //         },
-    //         opacity: 0,
-    //         y: -100,
-    //         ease: "power2.inOut",
-    //     });
-    //     }, heroRef);
-
-    //     return () => {
-    //     ctx.revert(); // This reverts only what's created in this component
-    //     };
-    // }, [])
+    })
 
   return (
     <>
-        <section ref={heroRef} className='h-screen z-[-1] pb-10 pt-20 md:pt-0 text-secondary font-libre'>
-            <div ref={heroContainerRef} className='w-full h-full flex justify-center items-center px-10'>
+        <section ref={heroRef} id="home" className='h-screen z-[-1] pb-10 pt-20 md:pt-0 text-secondary font-libre'>
+            <div ref={heroContainerRef} id='container-hero' className='w-full h-full flex justify-center items-center px-10'>
                 <div className='w-full flex flex-col items-center justify-center gap-3 mt-20'>
                     <div className='leading-normal'>
                         <span>

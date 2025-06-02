@@ -63,11 +63,11 @@ const About = () => {
             window.removeEventListener('scroll', handleScroll);
             gsap.set(container, { scaleX: 1 }); // Reset on unmount
         };
-    }, {scope: workRef.current})
+    })
 
   return (
     <section ref={workRef} id='about' className='relative'>
-        <div id='container' ref={workContainerRef} className='bg-secondary text-primary border-none rounded-b-3xl font-libre'>
+        <div id='container-about' ref={workContainerRef} className='bg-secondary text-primary border-none rounded-b-3xl font-libre'>
             <div className='border-t border-t-[#3f3f38] flex flex-col gap-y-16 md:px-10 px-6'>
                 <div className='grid grid-cols-12 gap-2 mt-20'>
                     <LuArrowDownRight size={100} className='text-primary col-span-1 font-thin col-start-2 hidden md:block'/>
