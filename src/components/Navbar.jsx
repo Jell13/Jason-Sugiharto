@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 
 const NavBar = () => {
 
@@ -10,11 +11,11 @@ const NavBar = () => {
   const handleScroll = () => {
     if(window.scrollY >= window.innerHeight){
       setIsScrolling(true)
-      // console.log("The other shows up")
+      console.log("The other shows up")
     }
     else{
       setIsScrolling(false)
-      // console.log("Fixed shows up")
+      console.log("Fixed shows up")
     }
   }
 
@@ -35,6 +36,25 @@ const NavBar = () => {
 export default NavBar
 
 function NavBarFixed () {
+
+  const headerRef = useRef()
+
+  useGSAP(() => {
+    const tl = gsap.timeline();
+
+    gsap.set(headerRef.current, { 
+      opacity: 0, 
+      y: -50 
+    });
+
+    tl.to(headerRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.inOut", // Same easing as hero
+      delay: 0.5 // Adjust timing as needed
+    });
+  })
   
   const links = [
       {
@@ -60,7 +80,7 @@ function NavBarFixed () {
   ]
 
   return (
-    <header className='w-full font-libre absolute py-8  md:px-10 px-4 flex inset-x-0 z-10 justify-between items-center text-third'>
+    <header ref={headerRef} className='w-full font-libre absolute py-8  md:px-10 px-4 flex inset-x-0 z-10 justify-between items-center text-third'>
       <div className='flex flex-col md:flex-row md:gap-7 md:items-center'>
         <div className='flex items-center'>
         <span>&#169;</span><p className='text-lg font-semibold tracking-tighter text-secondary'>Code By Jason</p>
@@ -97,8 +117,10 @@ function NavBarScroll () {
     }
   }
 
-  useEffect(() => {
+  useGSAP(() => {
     const buttonT1 = gsap.timeline({defaults: {ease: "power4.out"}})
+    const masterT2 = gsap.timeline({defaults: {ease: "power3.out"}})
+
 
     buttonT1.fromTo(buttonRef.current, 
       { scale: 0, opacity: 0 }, 
@@ -106,15 +128,17 @@ function NavBarScroll () {
     )
   }, [])
 
-  useEffect(() => {
-    const masterT1 = gsap.timeline({defaults: {ease: "power3.out"}})
+  useGSAP(() => {
+    const masterT1 = gsap.timeline({defaults: {ease: "power2.out"}})
 
     if (active) {
+      // Opening animation
       masterT1.fromTo(containerRef.current, 
         { x: "100%", opacity: 1},
-        { x: "0%", duration: 0.6, ease: "power2.out"}
+        { x: "0%", duration: 1.2, ease: "power1.out"}
       );
 
+      // Stagger animation for links
       masterT1.fromTo(linkRef.current,
         { x: 50, opacity: 0 },
         { x: 0, opacity: 1, stagger: 0.1, duration: 0.7 },
@@ -122,6 +146,7 @@ function NavBarScroll () {
       );
     }
     else{
+      // Closing animation
       if(containerRef.current){
         gsap.to(containerRef.current, 
           {
@@ -132,7 +157,7 @@ function NavBarScroll () {
         )
       }
     }
-  }, [active])
+  }, { dependencies: [active] })
   const links = [
     {
         id: 1,
@@ -167,7 +192,7 @@ function NavBarScroll () {
       <button
       ref={buttonRef}
       onClick={() => setActive(!active)}
-      className='text-black text-xl z-40 fixed flex flex-col justify-center items-center right-7 top-7 rounded-full size-16 bg-primary hover:scale-90'>
+      className='text-black text-xl z-50 fixed flex flex-col justify-center items-center md:right-7 right-4 top-7 rounded-full size-16 bg-primary hover:scale-90'>
         <span className={`w-7 h-[2px] bg-secondary absolute rounded-full ${active ? "translate-y-0 rotate-45": "-translate-y-1 rotate-0"} duration-300`}></span>
         <span className={`w-7 h-[2px] bg-secondary absolute rounded-full ${active ? "translate-y-0 -rotate-45": "translate-y-1 rotate-0"} duration-300`}></span>
       </button>

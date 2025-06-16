@@ -41,11 +41,11 @@ function App() {
 
   return (
     <>
-      <div className="grainy">
+      <div className="">
         {loading && <Loader onComplete={handleAnimationComplete}/>}
+        {!loading && <Navbar/>}
         <div ref={mainContentRef} style={{ opacity: loading ? 0 : 1 }}>
           <ReactLenis root>
-            <Navbar/>
             <Hero/>
             <Services/>
             <Works/>
