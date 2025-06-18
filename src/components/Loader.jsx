@@ -26,8 +26,12 @@ const Loader = ({onComplete}) => {
   return (
     <div 
     ref={loaderRef}
-    className="fixed top-0 left-0 w-full h-full bg-black z-20"
-    />
+    className="fixed top-0 left-0 w-screen h-full bg-black z-20"
+    >
+      <div className='relative w-full h-full'>
+        <img src="./logo-w.svg" alt="" className='md:w-[200px] w-[100px] absolute right-10 bottom-10'/>
+      </div>
+    </div>
   )
 }
 
