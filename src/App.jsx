@@ -41,7 +41,7 @@ function App() {
 
   return (
     <>
-      <div className="">
+      <div className="grainy">
         {loading && <Loader onComplete={handleAnimationComplete}/>}
         {!loading && <Navbar/>}
         <div ref={mainContentRef} style={{ opacity: loading ? 0 : 1 }}>
