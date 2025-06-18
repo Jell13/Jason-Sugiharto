@@ -129,13 +129,13 @@ function NavBarScroll () {
   }, [])
 
   useGSAP(() => {
-    const masterT1 = gsap.timeline({defaults: {ease: "power2.out"}})
+    const masterT1 = gsap.timeline({defaults: {ease: "power3.inOut"}})
 
     if (active) {
       // Opening animation
       masterT1.fromTo(containerRef.current, 
         { x: "100%", opacity: 1},
-        { x: "0%", duration: 1.2, ease: "power1.out"}
+        { x: "0%", duration: 0.3, ease: "power3.out"}
       );
 
       // Stagger animation for links
