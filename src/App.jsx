@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import ReactLenis from "lenis/react";
+import { ReactLenis, useLenis } from 'lenis/react'
 import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";
 import Services from "./sections/Services";
@@ -9,12 +9,18 @@ import About from "./sections/About";
 import Contact from "./sections/Contact";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import LenisProvider from "./providers/LenisProvider";
 
 
 function App() {
 
   const [loading, setLoading] = useState(true);
   const mainContentRef = useRef();
+
+  const lenis = useLenis((lenis) => {
+    // called every scroll
+    console.log(lenis)
+  })
 
   const handleAnimationComplete = () => {
     setLoading(false);
@@ -45,13 +51,13 @@ function App() {
         {loading && <Loader onComplete={handleAnimationComplete}/>}
         {!loading && <Navbar/>}
         <div ref={mainContentRef} style={{ opacity: loading ? 0 : 1 }}>
-          <ReactLenis root>
+          <LenisProvider>
             <Hero/>
             <Services/>
             <Works/>
             <About/>
             <Contact/>
-          </ReactLenis>
+          </LenisProvider>
         </div>
       </div>
     </>
