@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { useLenis } from 'lenis/react'
 
 const NavBar = () => {
 
@@ -109,6 +110,32 @@ function NavBarScroll () {
   const buttonRef = useRef();
   const containerRef = useRef();
   const t1 = gsap.timeline();
+  const lenis = useLenis();
+
+  useEffect(() => {
+        if (active) {
+            // Stop Lenis smooth scrolling
+            lenis?.stop();
+            
+            // Also prevent regular scrolling as backup
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
+        } else {
+            // Re-enable Lenis smooth scrolling
+            lenis?.start();
+            
+            // Re-enable regular scrolling
+            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
+        }
+
+        // Cleanup function
+        return () => {
+            lenis?.start();
+            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
+        };
+    }, [active, lenis]);
 
   useGSAP(() => {
     t1.fromTo(buttonRef.current,{
@@ -190,7 +217,7 @@ function NavBarScroll () {
       <button
       ref={buttonRef}
       onClick={() => setActive(!active)}
-      className='text-black text-xl z-50 fixed flex flex-col justify-center items-center md:right-7 right-4 top-7 rounded-full size-16 bg-primary hover:scale-90'>
+      className='text-black text-xl z-50 fixed flex flex-col justify-center items-center md:right-7 right-4 md:top-7 top-4 rounded-full size-16 bg-primary hover:scale-90'>
         <span className={`w-7 h-[2px] bg-secondary absolute rounded-full ${active ? "translate-y-0 rotate-45": "-translate-y-1 rotate-0"} duration-300`}></span>
         <span className={`w-7 h-[2px] bg-secondary absolute rounded-full ${active ? "translate-y-0 -rotate-45": "translate-y-1 rotate-0"} duration-300`}></span>
       </button>
