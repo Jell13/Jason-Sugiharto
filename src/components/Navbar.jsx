@@ -489,7 +489,7 @@ function NavBarScroll() {
                                             </span> */}
                                             
                                             {/* Link Name */}
-                                            <span className="text-xl md:text-3xl lg:text-4xl font-bold text-stone-200 group-hover:text-amber-400 transition-all duration-500 group-hover:translate-x-2">
+                                            <span className="text-3xl md:text-3xl lg:text-4xl font-bold text-stone-200 group-hover:text-amber-400 transition-all duration-500 group-hover:translate-x-2">
                                                 {link.name}
                                             </span>
                                         </a>
@@ -509,23 +509,23 @@ function NavBarScroll() {
                                         href="mailto:jason@example.com" 
                                         className="text-stone-200 hover:text-amber-400 transition-colors duration-300 text-lg"
                                     >
-                                        jason@example.com
+                                        jasonliesugiharto@gmail.com
                                     </a>
                                 </div>
 
                                 {/* Social Links (Optional) */}
                                 <div className="flex gap-4 text-stone-400">
-                                    <a href="#" className="hover:text-amber-400 transition-colors duration-300 text-sm uppercase tracking-wider">
+                                    <a href="https://www.linkedin.com/in/jason-sugiharto/" target="_blank" className="hover:text-amber-400 transition-colors duration-300 text-sm uppercase tracking-wider">
                                         LinkedIn
                                     </a>
                                     <span className="text-stone-700">•</span>
-                                    <a href="#" className="hover:text-amber-400 transition-colors duration-300 text-sm uppercase tracking-wider">
+                                    <a href="https://github.com/Jell13?tab=overview&from=2024-05-01&to=2024-05-30" target="_blank" className="hover:text-amber-400 transition-colors duration-300 text-sm uppercase tracking-wider">
                                         GitHub
                                     </a>
-                                    <span className="text-stone-700">•</span>
-                                    <a href="#" className="hover:text-amber-400 transition-colors duration-300 text-sm uppercase tracking-wider">
+                                    {/* <span className="text-stone-700">•</span> */}
+                                    {/* <a href="" target="_blank" className="hover:text-amber-400 transition-colors duration-300 text-sm uppercase tracking-wider">
                                         Twitter
-                                    </a>
+                                    </a> */}
                                 </div>
                             </div>
                         </div>
