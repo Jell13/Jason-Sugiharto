@@ -1,16 +1,19 @@
 import React from 'react'
-import { ReactLenis, useLenis } from 'lenis/react'
+import { ReactLenis } from 'lenis/react'
 
 const LenisProvider = ({children}) => {
-
-    const lenis = useLenis((lenis) => {
-        // called every scroll
-        console.log(lenis)
-    })
-
   return (
-    <ReactLenis root>
-        {children}
+    <ReactLenis 
+      root 
+      options={{ 
+        lerp: 0.1, 
+        duration: 1.2, 
+        smoothWheel: true,
+        smoothTouch: false,
+        normalizeWheel: true
+      }}
+    >
+      {children}
     </ReactLenis>
   )
 }
