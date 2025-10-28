@@ -5,22 +5,22 @@ const Works = () => {
         {
             id: 1,
             number: "01",
-            title: "LiveDocs",
-            subtitle: "Workspace Collaborator",
-            category: "Productivity | Collaboration",
-            year: "2024",
+            title: "StudyPilot",
+            subtitle: "AI-Powered Study & Flashcard Generator",
+            category: "Education | AI Learning",
+            year: "2025",
             image: "https://www.lifewire.com/thmb/Uqi3NYSBuoCojLl65_it-e5NmVg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/keyboard-light-up-razer-gaming-2b6aa4b392184326925211f0cae4d6b9.jpg",
-            link: "#", // Changed from empty string to "#" for demo
+            link: "https://study-co.vercel.app/", // Changed from empty string to "#" for demo
         },
         {
             id: 2,
             number: "02",
-            title: "Project Two",
-            subtitle: "Digital Experience",
-            category: "Web Development | Design",
+            title: "NoteNet",
+            subtitle: "Distraction-Free Note-Taking App",
+            category: "Productivity | Focus",
             year: "2024",
             image: "https://preview.redd.it/pkvfv2b209i61.jpg?width=4032&format=pjpg&auto=webp&s=f8a961144201dff925b7ec7ec3d3d4d09d10a338",
-            link: "#",
+            link: "https://notenet.vercel.app/",
         },
         {
             id: 3,
@@ -61,6 +61,7 @@ const Works = () => {
                         <a
                             href={project.link}
                             key={project.id}
+                            target="_blank"
                             className="block group"
                         >
                             <div
