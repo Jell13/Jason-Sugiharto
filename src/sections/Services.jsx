@@ -199,12 +199,12 @@ const Services = () => {
   };
 
   return (
-    <section id='services' className='rounded-t-3xl bg-secondary border-none text-stone-200'>
+    <section id='services' className='rounded-t-3xl bg-secondary border-none text-stone-200 font-man'>
       <div className='flex flex-col md:px-10 py-20 px-6'>
         {/* Header Section */}
         <div className='mb-20'>
           <span className='text-stone-200 text-5xl md:text-7xl lg:text-8xl'>
-            <h2 className='inline-block mr-2 font-bold'>WHAT I DO /</h2>
+            <h2 className='inline-block mr-2 font-bold font-ones'>WHAT I DO /</h2>
           </span>
         </div>
 
