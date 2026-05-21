@@ -1,4 +1,7 @@
 import React from "react";
+import studypilot from "../assets/studypilot.png"
+import aidecuisine from "../assets/aidecuisine.png"
+import bakewhisperer from "../assets/bakewhisperer.png"
 
 const Works = () => {
     const projects = [
@@ -10,27 +13,30 @@ const Works = () => {
             category: "Education | AI Learning",
             year: "2025",
             image: "https://www.lifewire.com/thmb/Uqi3NYSBuoCojLl65_it-e5NmVg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/keyboard-light-up-razer-gaming-2b6aa4b392184326925211f0cae4d6b9.jpg",
+            inside_image: studypilot,
             link: "https://study-co.vercel.app/", // Changed from empty string to "#" for demo
         },
         {
             id: 2,
             number: "02",
-            title: "NoteNet",
-            subtitle: "Distraction-Free Note-Taking App",
-            category: "Productivity | Focus",
+            title: "Bake Whisperer",
+            subtitle: "Custom Bakery Website for a Local Client",
+            category: "Freelance | Web Dev | Full Stack",
             year: "2024",
             image: "https://preview.redd.it/pkvfv2b209i61.jpg?width=4032&format=pjpg&auto=webp&s=f8a961144201dff925b7ec7ec3d3d4d09d10a338",
-            link: "https://notenet.vercel.app/",
+            inside_image: bakewhisperer,
+            link: "https://www.bake-whisperer.com/",
         },
         {
             id: 3,
             number: "03",
-            title: "Project Three",
-            subtitle: "Innovation Platform",
-            category: "Full Stack | API",
-            year: "2024",
+            title: "NoteNet",
+            subtitle: "Distraction-Free Note-Taking App",
+            category: "Productivity | Focus",
+            year: "2025",
             image: "https://i.redd.it/xlwemhje70i81.jpg",
-            link: "#",
+            inside_image: aidecuisine,
+            link: "https://aide-cuisine.vercel.app/",
         },
     ];
 
@@ -65,11 +71,10 @@ const Works = () => {
                             className="block group"
                         >
                             <div
-                                className={`flex flex-col ${
-                                    index % 2 === 0
+                                className={`flex flex-col ${index % 2 === 0
                                         ? "lg:flex-row"
                                         : "lg:flex-row-reverse"
-                                } gap-12 items-start relative no-underline`}
+                                    } gap-12 items-start relative no-underline`}
                             >
                                 {/* Image Container */}
                                 <div className="lg:w-1/2 w-full relative overflow-hidden rounded-2xl bg-stone-800">
@@ -81,6 +86,25 @@ const Works = () => {
                                         />
                                         {/* Overlay gradient on hover */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-stone-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                        <div className="absolute inset-4 md:inset-6 rounded-xl overflow-hidden border border-stone-600/50 shadow-2xl">
+                                            {/* Fake browser bar */}
+                                            <div className="bg-stone-800 px-4 py-2 flex items-center gap-2 border-b border-stone-700">
+                                                <div className="flex gap-1.5">
+                                                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/70"></div>
+                                                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70"></div>
+                                                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/70"></div>
+                                                </div>
+                                                <div className="flex-1 bg-stone-700 rounded-md h-5 mx-4 flex items-center px-3">
+                                                    <span className="text-stone-400 text-xs truncate">{project.link}</span>
+                                                </div>
+                                            </div>
+                                            {/* Your actual app screenshot goes here */}
+                                            <img
+                                                src={project.inside_image}
+                                                alt={`${project.title} dashboard`}
+                                                className="w-full h-full object-contain object-top"
+                                            />
+                                        </div>
                                     </div>
                                     <div className="absolute top-6 right-6 w-16 h-16 rounded-full bg-stone-900/90 backdrop-blur-sm flex items-center justify-center border border-stone-700 transition-all duration-500 group-hover:scale-110 group-hover:border-amber-400/50">
                                         <span className="text-2xl font-bold text-stone-400 transition-colors duration-500 group-hover:text-amber-400">
